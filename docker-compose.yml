@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  # MongoDB service
+  mongo_db:
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo_db:/data/db
+    # ports:
+    #   - 27017:27017
+  # Node API service   
+  api:
+    build: .
+    ports:
+      - 4200:4200
+    environment:
+      MONGODB_URI: mongodb://mongo_db:27017
+      SECRET_TOKEN: talkischeapshowmethecode
+      commands:
+        ng serve --host 0.0.0.0        
+    depends_on:
+      - mongo_db
+volumes:
+  mongo_db: {}
+      
