@@ -1,49 +1,49 @@
 # Reproduction package project for Reproduction Engenieering lecture
 # JSON Schema Discovery Reproduction
 
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 MAINTAINER Ilnaz Tayebi <tayebi01@ads.uni-passau.de>
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG="C.UTF-8"
 ENV LC_ALL="C.UTF-8"
+ENV PYTHON=/usr/bin/python2.7
 
-#ca-certificates allow git clone access
-#npm #Node Package Manager
-RUN apt update && apt install -y --no-install-recommends \
+RUN apt update && apt install -y \
 	ca-certificates \
 	git \
-	# texlive-base \
+	curl \
+	python2.7 \
+	r-cran-ggplot2 \
+	r-cran-reshape2 \
+	r-cran-knitr 
+	# sudo\
+	# texlive-base 
 	# texlive-bibtex-extra \
 	# texlive-fonts-recommended \
 	# texlive-generic-extra \
 	# texlive-latex-extra \
-	# texlive-publishers\
-	sudo
+	# texlive-publishers
 
-# Install Mongodb
-# Import MongoDB public GPG key AND create a MongoDB list file
-# RUN apt-get update && apt-get install -y gnupg
-# RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-# RUN echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.0.list
-# Update apt-get sources AND install MongoDB
-# RUN apt-get update && apt-get install -y mongodb
-# RUN mkdir -p /data/db
-#  EXPOSE 27017
-#  ENTRYPOINT ["/usr/bin/mongod"]
+
 
 # Install Node.js
-# RUN apt update
-# RUN printf 'y\n1\n\1n' | apt install nodejs
-#####************************************
-# RUN apt-get update && \
-#  apt-get install -y \
-#     nodejs npm
+# RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - && \
+#	apt-get install -y nodejs=6.11.2
 
-RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - && \
- apt-get install -y nodejs \
-    nodejs npm
+RUN mkdir -p /usr/local/nvm
+ENV NVM_DIR /usr/local/nvm
+# IMPORTANT: set the exact version
+ENV NODE_VERSION v6.11.2
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+RUN /bin/bash -c "source $NVM_DIR/nvm.sh && nvm install $NODE_VERSION && nvm use --delete-prefix $NODE_VERSION"
+# add node and npm to the PATH
+ENV NODE_PATH $NVM_DIR/versions/node/$NODE_VERSION/bin
+ENV PATH $NODE_PATH:$PATH
+RUN npm -v
+RUN node -v
+
 # Prepare directory structure
 ## git-repos/       - for external git repositories
 ## build/           - temporary directory for out-of-tree builds
@@ -60,14 +60,11 @@ WORKDIR /home/repro/git-repos/JSONSchemaDiscovery
 # ## Angular CLI **npm install -g @angular/cli
 # ## Typescript **npm install -g typescript
 # # install and cache app dependencies
-
-RUN apt install -y npm
-RUN npm install -g @angular/cli
-RUN npm install -g typescript
+RUN npm install -g node-gyp@3.8.0
 RUN npm install
+RUN npm install -g @angular/cli@1.4.3
+RUN npm install -g typescript@2.3.3
 RUN ng build
-EXPOSE 3000
-#RUN npm run dev
-# CMD ["npm","start"]
-
+EXPOSE 4200
+CMD [ "ng", "serve" ]
 
