@@ -65,6 +65,8 @@ RUN npm install
 RUN npm install -g @angular/cli@1.4.3
 RUN npm install -g typescript@2.3.3
 RUN ng build
-EXPOSE 4200
-CMD [ "ng", "serve" ]
+# CMD [ "ng", "e2e" ]
+CMD [ "ng", "serve", "--host", "0.0.0.0" ]
+# CMD [ "executable" ]
+EXPOSE 4200/tcp
 
