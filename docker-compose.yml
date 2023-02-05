@@ -2,8 +2,9 @@ version: "3.8"
 
 services:
   mongo:
-    restart: always
     image: mongo:4.2.0
+    container_name: mongodb
+    restart: always
     volumes:
       - ./data:/data/db
     networks:
@@ -15,14 +16,22 @@ services:
     container_name: api
     build: .
     ports:
-      - 4200:4200
-    environment:
-      MONGODB_URI: mongodb://mongo:27017
-      SECRET_TOKEN: talkischeapshowmethecode
-      commands:
-        CMD [ "ng", "serve", "--host", "0.0.0.0" ]             
+      - 27017:27017
+  # dbseed Service
+  mongo_seed:
+    image: mongo:4.2.0
+    container_name: mongo_seed
+    links:
+      - mongo
+    volumes:
+      - ./dataset:/dataset
+    command:
+      /dataset/import.sh    
+    networks:
+      - express-mongo
     depends_on:
       - mongo
+
 volumes:
   mongo: {}
 networks:
