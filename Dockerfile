@@ -67,6 +67,15 @@ WORKDIR /usr/bin
 COPY scripts/doallsteps.sh .
 RUN chmod +x doallsteps.sh
 
+COPY scripts/docheckinsschema.sh .
+RUN chmod +x docheckinsschema.sh
+
+COPY scripts/dotweetsschema.sh .
+RUN chmod +x dotweetsschema.sh
+
+COPY scripts/dovenuesschema.sh .
+RUN chmod +x dovenuesschema.sh
+
 COPY scripts/prepare_data.sh .
 RUN chmod +x prepare_data.sh
 
