@@ -4,18 +4,6 @@
 host=localhost
 port=3000
 
-if [ $# -eq 0 ]
-  then
-    echo "No arguments supplied"
-fi
-
-while getopts "h: p:" arg; 
-  do
-    case $arg in
-      h) host=$OPTARG;;
-      p) port=$OPTARG;;
-    esac
-done
 rm /usr/bin/reproresults/*.txt
 rm /usr/bin/reproresults/*.json
 echo "Host: $host; Port: $port"

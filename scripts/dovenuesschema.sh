@@ -4,18 +4,6 @@
 host=localhost
 port=3000
 
-if [ $# -eq 0 ]
-  then
-    echo "No arguments supplied"
-fi
-
-while getopts "h: p:" arg; 
-  do
-    case $arg in
-      h) host=$OPTARG;;
-      p) port=$OPTARG;;
-    esac
-done
 rm /usr/bin/reproresults/*.txt
 rm /usr/bin/reproresults/*.json
 echo "Host: $host; Port: $port"
@@ -28,7 +16,7 @@ header1="Content-Type: application/json"
 header2="Authorization: Bearer"
 curl $host:$port/api/batches -H "$header1" -H "$header2 $token" > /usr/bin/reproresults/batches.txt
 
-
+# Collection venues
 curl $host:$port/api/batch/rawschema/steps/all -X POST -H 'Content-Type: application/json' -H "$header2 $token" -d '{"authentication":{"authMechanism":"SCRAM-SHA-1"},"port":"27017","address":"mongo","databaseName":"jsonschemadiscovery","collectionName":"venues","rawSchemaFormat":false}' > /usr/bin/reproresults/allsteps.txt
 
 curl $host:$port/api/batches -H 'Content-Type: application/json' -H "$header2 $token" > /usr/bin/reproresults/allbatches.txt

@@ -26,12 +26,13 @@ services:
     volumes:
       - ./dataset:/dataset
     command:
-      /dataset/import.sh    
+      /dataset/import.sh ${collectionName} 
+    environment:
+      - ${collectionName}=value
     networks:
       - express-mongo
     depends_on:
-      - mongo
-
+      - mongo        
 volumes:
   mongo: {}
 networks:

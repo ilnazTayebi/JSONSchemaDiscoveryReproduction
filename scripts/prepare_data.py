@@ -3,7 +3,7 @@ import os
 import datetime
 import json
 
-def main():
+def generatetable():
 	directory = "."
 	os.chdir(directory)
 	file_list = glob.glob("*.json")
@@ -26,4 +26,4 @@ def main():
 	print("\end{tabular}")
 
 if __name__ == '__main__':
-	main()
+	generatetable()
