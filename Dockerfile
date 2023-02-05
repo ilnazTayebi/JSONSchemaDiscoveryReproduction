@@ -17,8 +17,8 @@ RUN apt update && apt install -y \
 	nano\
 	python2.7\
 	texlive-base \
-	# texlive-bibtex-extra \
-	# texlive-fonts-recommended \
+	texlive-bibtex-extra \
+	texlive-fonts-recommended \
 	# texlive-generic-extra \
 	# texlive-latex-extra \
 	# texlive-publishers

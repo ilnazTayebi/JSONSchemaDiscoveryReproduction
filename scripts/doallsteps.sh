@@ -4,7 +4,7 @@ port=3000
 
 rm /usr/bin/reproresults/*.txt
 rm /usr/bin/reproresults/*.json
-echo "Host: $host; Port: $port"
+
 # Create an account
 curl $host:$port/api/register -X POST -H 'Content-Type: application/json' -d '{"username": "tayebi", "email": "tayebi@tayebi.de", "password": "tayebi107323"}' > /usr/bin/reproresults/info.txt
 # Login and get back the Token
