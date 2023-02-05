@@ -20,9 +20,9 @@ rm /usr/bin/resultsvenues/*.txt
 rm /usr/bin/resultsvenues/*.json
 echo "Host: $host; Port: $port"
 # Create an account
-curl $host:$port/api/register -X POST -H 'Content-Type: application/json' -d '{"username": "test", "email": "test@test.de", "password": "test123456"}' > /usr/bin/resultsvenues/info.txt
+curl $host:$port/api/register -X POST -H 'Content-Type: application/json' -d '{"username": "tayebi", "email": "tayebi@tayebi.de", "password": "tayebi107323"}' > /usr/bin/resultsvenues/info.txt
 # Login and get back the Token
-curl $host:$port/api/login -X POST -H 'Content-Type: application/json' -d '{"email": "test@test.de", "password": "test123456"}' > /usr/bin/resultsvenues/token.txt
+curl $host:$port/api/login -X POST -H 'Content-Type: application/json' -d '{"email": "tayebi@tayebi.de", "password": "tayebi107323"}' > /usr/bin/resultsvenues/token.txt
 token=$(jq .token -r /usr/bin/resultsvenues/token.txt)
 header1="Content-Type: application/json"
 header2="Authorization: Bearer"
