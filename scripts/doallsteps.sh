@@ -28,6 +28,31 @@ header1="Content-Type: application/json"
 header2="Authorization: Bearer"
 curl $host:$port/api/batches -H "$header1" -H "$header2 $token" > /usr/bin/reproresults/batches.txt
 
+# Collection venues
+curl $host:$port/api/batch/rawschema/steps/all -X POST -H 'Content-Type: application/json' -H "$header2 $token" -d '{"authentication":{"authMechanism":"SCRAM-SHA-1"},"port":"27017","address":"mongo","databaseName":"jsonschemadiscovery","collectionName":"venues","rawSchemaFormat":false}' > /usr/bin/reproresults/allsteps.txt
+
+curl $host:$port/api/batches -H 'Content-Type: application/json' -H "$header2 $token" > /usr/bin/reproresults/allbatches.txt
+
+jq '.[] | select( .status == "DONE" ) |  select( .collectionName == "venues") | ._id' -r /usr/bin/reproresults/allbatches.txt > /usr/bin/reproresults/batchidlist.txt
+
+# REDUCE_DOCUMENTS
+while read -u 10 id; do
+	curl $host:$port/api/batch/$id -H 'Content-Type: application/json' -H "$header2 $token" > /usr/bin/reproresults/batch_$id.json
+done 10< /usr/bin/reproresults/batchidlist.txt
+
+# Collection checkins
+curl $host:$port/api/batch/rawschema/steps/all -X POST -H 'Content-Type: application/json' -H "$header2 $token" -d '{"authentication":{"authMechanism":"SCRAM-SHA-1"},"port":"27017","address":"mongo","databaseName":"jsonschemadiscovery","collectionName":"checkins","rawSchemaFormat":false}' > /usr/bin/reproresults/allsteps.txt
+
+curl $host:$port/api/batches -H 'Content-Type: application/json' -H "$header2 $token" > /usr/bin/reproresults/allbatches.txt
+
+jq '.[] | select( .status == "DONE" ) |  select( .collectionName == "checkins") | ._id' -r /usr/bin/reproresults/allbatches.txt > /usr/bin/reproresults/batchidlist.txt
+
+# REDUCE_DOCUMENTS
+while read -u 10 id; do
+	curl $host:$port/api/batch/$id -H 'Content-Type: application/json' -H "$header2 $token" > /usr/bin/reproresults/batch_$id.json
+done 10< /usr/bin/reproresults/batchidlist.txt
+
+# Collection tweets
 
 curl $host:$port/api/batch/rawschema/steps/all -X POST -H 'Content-Type: application/json' -H "$header2 $token" -d '{"authentication":{"authMechanism":"SCRAM-SHA-1"},"port":"27017","address":"mongo","databaseName":"jsonschemadiscovery","collectionName":"tweets","rawSchemaFormat":false}' > /usr/bin/reproresults/allsteps.txt
 
