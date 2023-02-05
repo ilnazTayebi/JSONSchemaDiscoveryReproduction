@@ -39,3 +39,5 @@ jq '.[] | select( .status == "DONE" ) |  select( .collectionName == "checkins") 
 while read -u 10 id; do
 	curl $host:$port/api/batch/$id -H 'Content-Type: application/json' -H "$header2 $token" > /usr/bin/reproresults/batch_$id.json
 done 10< /usr/bin/reproresults/batchidlist.txt
+
+# REDUCE_DOCUMENTS
