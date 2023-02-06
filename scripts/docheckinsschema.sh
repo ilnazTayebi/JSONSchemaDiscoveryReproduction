@@ -1,6 +1,4 @@
 #!/bin/sh
-
-
 host=localhost
 port=3000
 
