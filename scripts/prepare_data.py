@@ -6,7 +6,7 @@ import json
 def generatetable():
 	directory = "."
 	os.chdir(directory)
-	file_list = glob.glob("*.json")
+	file_list = glob.glob("/usr/bin/reproresults/*.json")
 	# print("Files: ", file_list)
 	print ("\begin{tabular}{l|rrrrrrr}")
 	print("\toprule")
