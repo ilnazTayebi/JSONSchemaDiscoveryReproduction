@@ -7,8 +7,10 @@ Schema behind the existing JSON data file.
 - Clone the repository
   > git clone https://github.com/ilnazTayebi/JSONSchemaDiscoveryReproduction.git
 
--  Since the dataset is huge we could not upload it into the git repository directly. Download the Foursquare dataset.In the folder named combined all json and bson      files can be found.Put the bson files into the project's dataset folder.   
-   > https://www.dropbox.com/sh/j0bxw52b6fj46pm/AACOu60zgbNG1nKhnseYZ8uHa?dl=0  
+-  Since the dataset is huge we could not upload all three bson data files to the git repository. Currently the venues.bson file is uploaded in the Github repository. You can test the application only via this data file. If users intended to run applications with all datasets, then they can Download the Foursquare dataset. otherwise, skip the download file step. and go to build the docker file step.
+# Download Foursquare dataset
+  -In the folder named combined all json and bson files can be found.Put the bson files into the project's dataset folder.   
+    > https://www.dropbox.com/sh/j0bxw52b6fj46pm/AACOu60zgbNG1nKhnseYZ8uHa?dl=0  
 
 # Build the Docker image from scratch
   
