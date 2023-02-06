@@ -13,25 +13,16 @@ ENV PYTHON=/usr/bin/python2.7
 RUN apt update && apt install -y \
 	ca-certificates \
 	git \
+	curl \
 	jq \
-	nano\
-	python2.7\
-	texlive-base \
-	texlive-bibtex-extra \
-	texlive-fonts-recommended \
-	# texlive-generic-extra \
-	# texlive-latex-extra \
-	# texlive-publishers
+	nano \
+	python2.7 \
 	r-cran-ggplot2 \
 	r-cran-reshape2 \
-	r-cran-knitr 
-	# sudo\
-	# texlive-base 
-	# texlive-bibtex-extra \
-	# texlive-fonts-recommended \
-	# texlive-generic-extra \
-	# texlive-latex-extra \
-	# texlive-publishers
+	r-cran-knitr \
+	texlive-base \
+	texlive-bibtex-extra \
+	texlive-fonts-recommended 
 
 
 
@@ -96,8 +87,8 @@ RUN git checkout 5f819f8fe60f29439d9cc34476daefe35645a840
 # ## Angular CLI **npm install -g @angular/cli
 # ## Typescript **npm install -g typescript
 # # install and cache app dependencies
-RUN npm install -g node-gyp@3.8.0
-RUN npm install
+# RUN npm install -g node-gyp@3.8.0
+# RUN npm install
 RUN npm install -g @angular/cli@1.4.3
 RUN npm install -g typescript@2.3.3
 RUN npm install -g node-gyp@3.8.0
