@@ -22,8 +22,9 @@ RUN apt update && apt install -y \
 	r-cran-knitr \
 	texlive-base \
 	texlive-bibtex-extra \
-	texlive-fonts-recommended 
-
+	texlive-fonts-recommended \
+	texlive-latex-extra \
+	texlive-publishers 
 
 
 # Install Node.js
