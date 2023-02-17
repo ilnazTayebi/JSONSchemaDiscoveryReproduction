@@ -23,11 +23,11 @@ Schema behind the existing JSON data file.
 
       >$  $env:collectionName="venues";docker-compose up
 
-      - Import venues JASON file
+      - Import checkins JASON file
 
       >$  $env:collectionName="checkins";docker-compose up
       
-      - Import venues JASON file
+      - Import tweets JASON file
 
       >$  $env:collectionName="tweets";docker-compose up
 
