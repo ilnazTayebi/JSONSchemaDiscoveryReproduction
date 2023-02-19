@@ -40,7 +40,8 @@ Schema behind the existing JSON data file.
       >$  $env:collectionName="doall";docker-compose up
 
 - Now, we can get an interactive shell of the running docker service:
-      >$ docker exec -it api  bash
+
+       >$ docker exec -it api  bash
   
 - The measurement is based on the FOURSQUARE dataset, which is produced by ÇELIKTEN, E.; FALHER, G. L.; MATHIOUDAKIS, M. Modeling urban behavior mining geotagged social data. IEEE Transactions on Big Data, v. 3, n. 2, p. 220–233,June 2017. Use the following step to evaluate the average processing time spent in the schema extraction process for FOURSQUARE the datasets :
       
